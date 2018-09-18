@@ -6,48 +6,71 @@
 
 #define NPROD 1
 #define TAM 10
-#define NCONS 1
+#define NCONS 10
 
-int packages = 0;
+int buffer[TAM];
+int pos = 0;
 pthread_mutex_t mutex_buffer = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t is_full = PTHREAD_COND_INITIALIZER;
-pthread_cond_t is_waiting = PTHREAD_COND_INITIALIZER;
+pthread_cond_t is_waiting =PTHREAD_COND_INITIALIZER;
+
 
 void * manufacturer(void *arg){
 	int id = *((int *)arg);
 	while(1){
 		pthread_mutex_lock(&mutex_buffer);
-		while(packages == TAM){
+        int item = (pos * pos)%TAM;
+		while(pos+1 == TAM){
 			pthread_cond_wait(&is_full, &mutex_buffer);
 		}
-		pthread_mutex_lock(&mutex_buffer);
-		packages += 1;
-		printf("Manufacturer %d is developing a new package... Total:%d \n", id, packages);
-		sleep(2);
+		buffer[pos] =  item;
+		printf("Manufacturer %d is developing a new package on lane %d... New value:%d \n", id, pos, item);
+		//sleep(1);
+        pos = (pos+1) % TAM;
+        if(pos == 1){
+            pthread_cond_broadcast(&is_waiting);
+        }
 		pthread_mutex_unlock(&mutex_buffer);
-		pthread_cond_broadcast(&is_waiting);
 	}
+    pthread_exit(0);
 }
 
 void * consumer(void *arg){	
 	int id = *((int *)arg);
 	while(1){
 		pthread_mutex_lock(&mutex_buffer);
-		while(packages == 0){
+		while(pos == 0){
+            printf("Consumer %d is waiting\n", id);
 			pthread_cond_wait(&is_waiting, &mutex_buffer);
 		}
-		pthread_mutex_lock(&mutex_buffer);
-		packages += -1;
-		printf("Consumer %d is picking up a package... Total:%d \n", id, packages);
-		sleep(10);
-		if(packages == 0){
+		int out = buffer[pos];
+		printf("Consumer %d is picking up a package %d on position %d... \n", id, out, pos);
+        pos = (pos -  1)%TAM;
+		//sleep(2);
+		if(pos == 0){
 			pthread_cond_broadcast(&is_full);
 		}
 		pthread_mutex_unlock(&mutex_buffer);
+        //sleep(30);
 	}
 }
 
 int main(int argc, char** argv){
 	pthread_t store_prod[NPROD];
 	pthread_t store_cons[NCONS];
+    int *id;
+    int i = 0;
+
+    id = (int *) malloc(sizeof(int));
+    *id = 0;
+    for(i=0; i < NCONS; i++){
+        *id = i;
+        pthread_create(&store_cons[i], NULL, consumer, (void*) id);
+    }
+    for(i=0; i < NPROD; i++){
+        *id = i;
+        pthread_create(&store_prod[i], NULL, manufacturer, (void*) id);
+    }
+    pthread_join(store_cons[0], NULL);
+    return 0;
 }
