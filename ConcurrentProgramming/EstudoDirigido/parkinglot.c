@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <pthread.h>
-#include <windows.h>
 
 #define N_PARKING_SPOTS 20
 #define N_MINUTES 1
@@ -21,7 +20,7 @@ int staff_waiting = 0;
 
 // functions
 void parking(int arg){
-	printf("CAR %d is parking.\n id%3 - 0(Prof), 1(Staff), 2(Stud)", arg);
+	printf("CAR %d is parking.\n id%3 = 0(Prof), 1(Staff), 2(Stud)", arg);
 }
 void leaving(int arg){
 	printf("CAR %d is leaving.\n", arg);
@@ -41,7 +40,7 @@ void * professor(void *arg){
 		prof_waiting--;
 		pthread_mutex_unlock(&mutex);
 		
-		Sleep(N_MINUTES);
+		sleep(N_MINUTES);
 		
 		pthread_mutex_lock(&mutex);
 		cars_parked--;
@@ -65,7 +64,7 @@ void * staff(void *arg){
 		staff_waiting--;
 		pthread_mutex_unlock(&mutex);
 		
-		Sleep(N_MINUTES);
+		sleep(N_MINUTES);
 		
 		pthread_mutex_lock(&mutex);
 		cars_parked--;
@@ -87,7 +86,7 @@ void * student(void *arg){
 		cars_parked++;
 		pthread_mutex_unlock(&mutex);
 		
-		Sleep(N_MINUTES);
+		sleep(N_MINUTES);
 		
 		pthread_mutex_lock(&mutex);
 		cars_parked--;
