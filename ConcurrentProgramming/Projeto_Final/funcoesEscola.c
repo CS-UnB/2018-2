@@ -1,6 +1,3 @@
-/*LOGICA FUNCIONANDO PARA 1 PROFESSOR*
-SOLUCIONAR COM VETOR DE SEMAFOROS E MUTEX COM UM ID PARA CADA PROFESSOR*/
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
