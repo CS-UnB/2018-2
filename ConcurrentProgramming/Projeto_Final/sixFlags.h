@@ -1,19 +1,15 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+#ifndef _SIX_FLAGS_
+#define _SIX_FLAGS_
 #include <pthread.h>
 #include <semaphore.h>
+#include "aux_func.h"
 
-struct ride {
-    char *name;
-    int minimum_age;
-    int best_suited_up_to;
-    int riding_time;
-}ride_t;
+void * toddler(void*);
+void * child(void*);
+void * teen(void*);
+void * youngAdult(void*);
+void * middleAgedAdult(void*);
+void * elder(void*);
+// void * ride(void*, const char*, const int, const int, const int);
 
-void * toddler(void *arg) {}
-void * child(void *arg) {}
-void * teen(void *arg) {}
-void * youngAdult(void *arg) {}
-void * middleAgedAdult(void *arg) {}
-void * elder(void *arg) {}
+#endif
