@@ -1,9 +1,8 @@
 #include "sixFlags.h"
-#define N_RIDES 5
 #define N_PEOPLE 355
 
 // Shared memory ---------------
-ride_t ride_array[N_RIDES];
+ride_t ride_array[8];
 // -----------------------------
 
 int main(int argc, char** argv) {

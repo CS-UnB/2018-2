@@ -1,22 +1,15 @@
 #ifndef _AUX_FUNC_
 #define _AUX_FUNC_
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
+#include <string>
 
-// DATA --------------------
-struct ride {
-    char *name;
-    int minimum_age;
-    int best_suited_up_to;
-    int riding_time;
-};
-typedef struct ride ride_t;
-const char *ride_name[6] = {"Drop Tower", "Ferris Wheel", "Water Slide", "Kamikazi", "Bump Car", "Roller Coaster"};
-// -------------------------
+namespace std {
 
-void build_struct(ride_t**, size_t);
-void fill_struct(ride_t**, char**);
+    class Ride {
+        const string ride_name;
+        const int best_suited_up_to;
+        const int minimum_age;
+        const int riding_time
+    };
+}
 
 #endif
