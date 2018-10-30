@@ -1,8 +1,16 @@
 #include "sixFlags.h"
 #define N_PEOPLE 355
+#define N_RIDES 8
 
+Ride::Ride(int idArg, std::string nameArg) {
+    this.id = idArg
+    this->name = nameArg;
+    this->bestSuitedForAgeUpTo = 
+}
 // Shared memory ---------------
-ride_t ride_array[8];
+for(int i=0; i < N_RIDES; i++) {
+    std::vector<Ride> rides(N_RIDES, nameVec[(i%N_RIDES)]);
+}
 // -----------------------------
 
 int main(int argc, char** argv) {
