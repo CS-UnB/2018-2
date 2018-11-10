@@ -162,7 +162,7 @@ DROP TABLE IF EXISTS `Detect`.`RelTypes` ;
 
 CREATE TABLE IF NOT EXISTS `Detect`.`RelTypes` (
  `RelTypeId` INT NOT NULL AUTO_INCREMENT,
- `RelTypeName` VARCHAR(50) NOT NULL UNIQUE,
+ `RelTypeName` VARCHAR(50) NOT NULL,
  `RelTypeDescription` VARCHAR(255),
  PRIMARY KEY (`RelTypeId`));
  
@@ -321,56 +321,7 @@ INSERT IGNORE INTO `Supervisors` (`SupervisorId`,`SupervisorName`,`SupervisorCPF
 -- Table `Detect`.`Users`
 -- -----------------------------------------------------
 
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (1,"Selma",94),(2,"Britanney",51),(3,"Montana",15),(4,"Claire",52),(5,"Dennis",20),(6,"Jason",86),(7,"Zoe",82),(8,"Jonah",65),(9,"Nasim",63),(10,"Haviva",66);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (11,"Vance",26),(12,"Clio",49),(13,"Lila",72),(14,"Yoko",65),(15,"Joseph",11),(16,"Todd",39),(17,"Kyra",61),(18,"Fatima",11),(19,"Reese",62),(20,"Alexandra",74);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (21,"Mallory",25),(22,"Illana",78),(23,"Brynn",92),(24,"Yael",85),(25,"Brenda",97),(26,"Cadman",75),(27,"Jerome",77),(28,"Vanna",58),(29,"David",97),(30,"Stephanie",60);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (31,"Alana",95),(32,"Maia",37),(33,"Fulton",26),(34,"Nola",62),(35,"Ayanna",23),(36,"Drew",36),(37,"Quincy",10),(38,"Rooney",82),(39,"Jameson",9),(40,"Shay",65);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (41,"Peter",94),(42,"Lev",41),(43,"Noah",5),(44,"Teagan",27),(45,"Gannon",94),(46,"Cynthia",82),(47,"Merrill",4),(48,"Lillith",13),(49,"Nathaniel",77),(50,"Armand",3);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (51,"Ishmael",56),(52,"Thane",76),(53,"Sophia",66),(54,"Hu",4),(55,"Buffy",19),(56,"Nita",90),(57,"Kitra",38),(58,"Hadassah",86),(59,"Gannon",24),(60,"Dora",60);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (61,"Bruce",26),(62,"Blake",40),(63,"Phelan",9),(64,"Wallace",3),(65,"Vaughan",55),(66,"Blair",40),(67,"Mohammad",74),(68,"Tatum",84),(69,"Barrett",16),(70,"Burton",69);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (71,"Mikayla",85),(72,"Lillith",30),(73,"Pearl",73),(74,"Zoe",56),(75,"Joelle",40),(76,"Axel",60),(77,"Jennifer",21),(78,"Levi",36),(79,"Ariel",7),(80,"Nadine",14);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (81,"Louis",71),(82,"Odessa",67),(83,"Megan",64),(84,"Beau",85),(85,"Jocelyn",31),(86,"Theodore",7),(87,"Hadley",95),(88,"Craig",68),(89,"Rhiannon",51),(90,"Fletcher",32);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (91,"Jelani",3),(92,"Carl",33),(93,"Melodie",55),(94,"Marvin",9),(95,"Caesar",38),(96,"Finn",20),(97,"Raymond",80),(98,"Xyla",41),(99,"Virginia",90),(100,"Linda",63);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (101,"Jacob",91),(102,"Derek",70),(103,"Kirby",5),(104,"Damon",68),(105,"Sybil",81),(106,"Octavius",54),(107,"Nomlanga",27),(108,"Vera",64),(109,"Marcia",74),(110,"Rhea",48);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (111,"Lavinia",58),(112,"Desiree",94),(113,"Imogene",42),(114,"Channing",61),(115,"Lilah",51),(116,"Christopher",89),(117,"Ebony",27),(118,"Olga",62),(119,"Quentin",100),(120,"Hadley",45);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (121,"Igor",42),(122,"Louis",15),(123,"Jin",19),(124,"Hyacinth",94),(125,"Donna",73),(126,"Keaton",8),(127,"Illiana",52),(128,"Hedwig",31),(129,"Ronan",50),(130,"Samuel",28);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (131,"Mikayla",62),(132,"Kylee",11),(133,"Irma",49),(134,"Joelle",8),(135,"Regan",88),(136,"Kyra",19),(137,"Pandora",54),(138,"Cadman",3),(139,"Dalton",42),(140,"Nichole",55);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (141,"Shaine",98),(142,"Portia",27),(143,"Knox",71),(144,"Serena",82),(145,"Tad",94),(146,"Barry",67),(147,"Raja",9),(148,"Hector",47),(149,"Galena",63),(150,"Patricia",28);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (151,"Sloane",90),(152,"Tanisha",52),(153,"Armando",86),(154,"Irma",9),(155,"Moses",26),(156,"Luke",3),(157,"Catherine",53),(158,"Sloane",100),(159,"Hayes",59),(160,"Hop",2);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (161,"Roary",3),(162,"Hoyt",13),(163,"Camille",49),(164,"Hollee",38),(165,"August",44),(166,"Reuben",9),(167,"David",59),(168,"Rashad",72),(169,"Lila",8),(170,"Desirae",32);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (171,"Kiayada",28),(172,"Malik",62),(173,"Tanner",17),(174,"Carlos",59),(175,"Lenore",70),(176,"Ronan",1),(177,"Calvin",35),(178,"Uriah",38),(179,"Lysandra",31),(180,"Buckminster",13);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (181,"Vernon",81),(182,"Stewart",68),(183,"Dieter",97),(184,"Armand",8),(185,"Montana",99),(186,"Adrienne",17),(187,"Isadora",2),(188,"Dexter",82),(189,"Macaulay",79),(190,"Louis",17);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (191,"Dylan",66),(192,"Nicole",51),(193,"Morgan",82),(194,"Kyla",25),(195,"Isaac",77),(196,"Heather",47),(197,"Melodie",66),(198,"Ross",69),(199,"Steel",35),(200,"Mariam",84);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (201,"Zeus",35),(202,"Fritz",65),(203,"Farrah",70),(204,"Keaton",41),(205,"Maris",3),(206,"Lee",59),(207,"Allen",6),(208,"Magee",38),(209,"Cameron",27),(210,"Norman",25);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (211,"Xyla",75),(212,"Uma",31),(213,"Larissa",98),(214,"Meredith",80),(215,"Brenden",64),(216,"Blythe",80),(217,"Thomas",25),(218,"Cadman",98),(219,"Yeo",6),(220,"Herman",68);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (221,"Brendan",14),(222,"Ryan",33),(223,"Norman",47),(224,"Bethany",91),(225,"Camden",3),(226,"Kareem",14),(227,"Ronan",59),(228,"Jack",34),(229,"Arsenio",100),(230,"Keane",9);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (231,"Marsden",2),(232,"Azalia",2),(233,"Nadine",57),(234,"Wynter",38),(235,"Anjolie",2),(236,"Iris",13),(237,"Noel",28),(238,"Regina",44),(239,"Wade",50),(240,"Lucas",43);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (241,"Noelle",80),(242,"Ferdinand",10),(243,"Quentin",79),(244,"Allegra",29),(245,"Jana",71),(246,"Aretha",65),(247,"Ferris",13),(248,"Boris",96),(249,"Savannah",12),(250,"Jackson",44);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (251,"Cody",38),(252,"Conan",95),(253,"Brennan",46),(254,"Michael",9),(255,"Nolan",75),(256,"Fuller",16),(257,"Hu",78),(258,"Cheyenne",10),(259,"Camille",90),(260,"Lionel",96);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (261,"Dustin",62),(262,"Georgia",49),(263,"Dawn",69),(264,"Aileen",87),(265,"Ulric",48),(266,"Dexter",2),(267,"Harlan",61),(268,"Rebekah",49),(269,"Kirk",1),(270,"Tanner",55);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (271,"Reagan",93),(272,"Odette",100),(273,"Ivor",92),(274,"Quincy",58),(275,"Diana",75),(276,"Madaline",49),(277,"Andrew",33),(278,"Len",38),(279,"Willa",73),(280,"Xanthus",81);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (281,"Benjamin",56),(282,"Laith",8),(283,"Fitzgerald",9),(284,"Emi",89),(285,"Tucker",14),(286,"Sheila",63),(287,"Eric",49),(288,"Ivan",92),(289,"Martin",34),(290,"Jacqueline",79);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (291,"Maisie",49),(292,"Honorato",46),(293,"Callie",43),(294,"Shannon",93),(295,"Kaden",100),(296,"Chaim",19),(297,"Farrah",37),(298,"Cedric",93),(299,"Roth",73),(300,"Berk",3);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (301,"Olga",27),(302,"Oliver",50),(303,"Ignatius",53),(304,"Evelyn",74),(305,"Stuart",47),(306,"Karly",82),(307,"Ian",72),(308,"Sophia",21),(309,"Graham",34),(310,"Jillian",35);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (311,"Martin",32),(312,"Eugenia",24),(313,"Imelda",19),(314,"Hadassah",18),(315,"Ali",33),(316,"Prescott",48),(317,"Kelly",9),(318,"Erasmus",71),(319,"Amaya",31),(320,"Valentine",93);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (321,"Kasimir",38),(322,"Kylee",5),(323,"Stephanie",73),(324,"Amir",8),(325,"Cleo",95),(326,"Aiko",30),(327,"Hedwig",22),(328,"Isabella",90),(329,"Drew",80),(330,"August",18);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (331,"Hollee",73),(332,"Shana",14),(333,"Malachi",43),(334,"Kylan",6),(335,"Wynter",92),(336,"Cade",34),(337,"Ruth",19),(338,"Harlan",33),(339,"Kennedy",54),(340,"Nissim",88);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (341,"Ezra",86),(342,"Dean",14),(343,"Rashad",57),(344,"Solomon",7),(345,"Jack",36),(346,"Merritt",90),(347,"Aladdin",54),(348,"Conan",62),(349,"Abra",33),(350,"Gisela",61);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (351,"William",16),(352,"Lee",30),(353,"Cecilia",49),(354,"Len",89),(355,"Cailin",11),(356,"Duncan",50),(357,"Fulton",2),(358,"Bernard",34),(359,"Zena",6),(360,"Quinlan",74);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (361,"Kyla",70),(362,"Cedric",63),(363,"Paki",18),(364,"Gary",31),(365,"Octavia",2),(366,"Rana",5),(367,"Lisandra",74),(368,"Ulysses",28),(369,"Veda",5),(370,"Avram",90);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (371,"Vivien",70),(372,"Acton",2),(373,"Holly",57),(374,"Micah",92),(375,"Kristen",19),(376,"Britanni",82),(377,"Lael",17),(378,"Lance",5),(379,"Barry",22),(380,"Jaquelyn",45);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (381,"Hollee",77),(382,"Rosalyn",48),(383,"Ciaran",41),(384,"Bruce",71),(385,"Nicholas",12),(386,"Lacey",42),(387,"Elvis",58),(388,"Bryar",1),(389,"Leila",37),(390,"Nash",82);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (391,"Regan",20),(392,"Erin",44),(393,"Carl",33),(394,"Helen",52),(395,"Tatum",6),(396,"Dahlia",15),(397,"Azalia",1),(398,"Oliver",86),(399,"Raya",56),(400,"Francesca",89);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (401,"Idona",75),(402,"Xena",23),(403,"Whitney",90),(404,"Dominique",29),(405,"Theodore",70),(406,"Simon",79),(407,"April",75),(408,"Tana",27),(409,"Thor",38),(410,"Quyn",20);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (411,"Acton",86),(412,"Rebekah",64),(413,"Sarah",4),(414,"Damian",40),(415,"Keane",4),(416,"Adele",7),(417,"Byron",11),(418,"Shana",45),(419,"Xander",65),(420,"Eugenia",42);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (421,"May",52),(422,"Anika",41),(423,"Dylan",76),(424,"Otto",43),(425,"Nathaniel",45),(426,"Christopher",10),(427,"Deacon",56),(428,"Aristotle",25),(429,"Tyler",17),(430,"Sonia",45);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (431,"Sharon",63),(432,"Nina",63),(433,"Regina",59),(434,"Burke",37),(435,"Zeph",57),(436,"Inga",74),(437,"Bo",83),(438,"Paloma",3),(439,"Macon",74),(440,"Victor",49);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (441,"Emery",46),(442,"Garrett",43),(443,"Britanni",4),(444,"Jade",62),(445,"Cairo",11),(446,"Sylvia",100),(447,"Shana",39),(448,"Wang",75),(449,"Nero",3),(450,"Kendall",49);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (451,"Trevor",34),(452,"Liberty",12),(453,"Timothy",58),(454,"Yoko",82),(455,"Aladdin",57),(456,"Silas",64),(457,"Bell",26),(458,"Abraham",21),(459,"Elaine",4),(460,"Octavius",5);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (461,"Ursula",25),(462,"Gillian",88),(463,"Shay",35),(464,"Lysandra",15),(465,"Elaine",23),(466,"Echo",72),(467,"Lilah",10),(468,"Stacy",41),(469,"Conan",72),(470,"Kim",11);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (471,"Ashton",99),(472,"Nevada",85),(473,"Candice",37),(474,"Cruz",3),(475,"Meredith",3),(476,"Malik",48),(477,"Sydney",51),(478,"Gwendolyn",61),(479,"Yardley",23),(480,"Catherine",32);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (481,"Flynn",54),(482,"Connor",13),(483,"Celeste",39),(484,"Louis",49),(485,"Selma",94),(486,"Neil",31),(487,"James",96),(488,"Christine",1),(489,"Whilemina",27),(490,"Melvin",91);
-INSERT INTO `Users` (`UserId`,`UserName`,`User_PlatformIdUser`) VALUES (491,"Nash",62),(492,"Orli",9),(493,"Malik",57),(494,"Iola",63),(495,"Zachery",66),(496,"Kibo",49),(497,"Quynn",83),(498,"Karen",48),(499,"Karina",13),(500,"Keane",13);
+INSERT INTO `Users` (`UserName`) VALUES ("Selma");
 
 -- -----------------------------------------------------
 -- Table `Detect`.`FeatureTypes`
@@ -421,16 +372,7 @@ INSERT INTO `RelTypes` (`RelTypeId`,`RelTypeName`,`RelTypeDescription`) VALUES (
 -- Associative Table `Detect`.`Relationships`
 -- -----------------------------------------------------
 
-INSERT INTO `Relationships` (`RelId`,`FriendId`,`RelType`) VALUES (1,93,85),(2,25,58),(3,71,13),(4,65,39),(5,40,53),(6,83,47),(7,20,57),(8,28,57),(9,15,19),(10,97,42);
-INSERT INTO `Relationships` (`RelId`,`FriendId`,`RelType`) VALUES (11,43,70),(12,64,24),(13,91,88),(14,8,53),(15,32,3),(16,52,83),(17,38,54),(18,88,5),(19,74,89),(20,59,19);
-INSERT INTO `Relationships` (`RelId`,`FriendId`,`RelType`) VALUES (21,35,85),(22,83,92),(23,82,34),(24,60,75),(25,55,68),(26,90,41),(27,77,75),(28,60,1),(29,53,84),(30,89,46);
-INSERT INTO `Relationships` (`RelId`,`FriendId`,`RelType`) VALUES (31,12,21),(32,26,78),(33,87,72),(34,93,8),(35,72,33),(36,100,100),(37,64,8),(38,82,18),(39,41,56),(40,26,13);
-INSERT INTO `Relationships` (`RelId`,`FriendId`,`RelType`) VALUES (41,39,13),(42,65,69),(43,18,65),(44,37,19),(45,77,68),(46,4,77),(47,18,57),(48,93,74),(49,76,76),(50,30,60);
-INSERT INTO `Relationships` (`RelId`,`FriendId`,`RelType`) VALUES (51,67,40),(52,86,89),(53,23,11),(54,78,3),(55,74,35),(56,61,68),(57,17,3),(58,62,64),(59,26,69),(60,83,5);
-INSERT INTO `Relationships` (`RelId`,`FriendId`,`RelType`) VALUES (61,89,33),(62,43,88),(63,64,64),(64,54,8),(65,35,76),(66,79,8),(67,11,76),(68,37,50),(69,18,96),(70,42,34);
-INSERT INTO `Relationships` (`RelId`,`FriendId`,`RelType`) VALUES (71,57,80),(72,93,70),(73,30,10),(74,63,90),(75,84,97),(76,38,5),(77,11,20),(78,84,29),(79,47,63),(80,32,39);
-INSERT INTO `Relationships` (`RelId`,`FriendId`,`RelType`) VALUES (81,10,80),(82,60,80),(83,17,44),(84,44,90),(85,47,50),(86,94,94),(87,59,80),(88,51,56),(89,89,95),(90,62,60);
-INSERT INTO `Relationships` (`RelId`,`FriendId`,`RelType`) VALUES (91,32,36),(92,62,74),(93,35,85),(94,37,96),(95,93,93),(96,97,94),(97,72,49),(98,21,2),(99,18,63),(100,15,7);
+INSERT INTO `Relationships` (`RelType`) VALUES (85);
 
 -- -----------------------------------------------------
 -- Table `Detect`.`Platforms`
