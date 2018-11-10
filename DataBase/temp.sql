@@ -162,7 +162,7 @@ DROP TABLE IF EXISTS `Detect`.`RelTypes` ;
 
 CREATE TABLE IF NOT EXISTS `Detect`.`RelTypes` (
  `RelTypeId` INT NOT NULL AUTO_INCREMENT,
- `RelTypeName` VARCHAR(50) NOT NULL UNIQUE,
+ `RelTypeName` VARCHAR(50) NOT NULL,
  `RelTypeDescription` VARCHAR(255),
  PRIMARY KEY (`RelTypeId`));
  
@@ -260,7 +260,7 @@ CREATE TABLE IF NOT EXISTS `Detect`.`User_Platform` (
  ON DELETE RESTRICT
  ON UPDATE RESTRICT
  
- );
+);
  
 
 SET SQL_MODE=@OLD_SQL_MODE;
@@ -277,70 +277,114 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- Table `Detect`.`Companies`
 -- -----------------------------------------------------
 INSERT INTO `Companies` (`CompanyName`,`CompanyDescription`) VALUES ("Scelerisque Neque Sed Limited","eu erat semper rutrum. Fusce dolor quam, elementum at, egestas");
+INSERT INTO `Companies` (`CompanyName`,`CompanyDescription`) VALUES ("Bang Bangs Company","Trabalhamos com produtos para cowboys");
+INSERT INTO `Companies` (`CompanyName`,`CompanyDescription`) VALUES ("Compania de humanos","Uma compania perfeitamente normal com humanos normais e sem nenhum robô do espaço.");
+INSERT INTO `Companies` (`CompanyName`,`CompanyDescription`) VALUES ("Hellwomann's","Fabricamos maioneses feministas");
+INSERT INTO `Companies` (`CompanyName`,`CompanyDescription`) VALUES ("Google","eh soh pesquisar no google sobre a gente");
 
 -- -----------------------------------------------------
 -- Table `Detect`.`Roles`
 -- -----------------------------------------------------
 
-INSERT IGNORE INTO `Roles` (`RoleName`,`RoleDescription`) VALUES ("Research and Development","Sales and Marketing is their department");
-
+INSERT IGNORE INTO `Roles` (`RoleName`,`RoleDescription`) VALUES ("Research and Development","Sales and Marketing is their department.");
+INSERT IGNORE INTO `Roles` (`RoleName`,`RoleDescription`) VALUES ("Vendas e Servicos","Trocam seus produtos e sua mão de obra por dinheiro.");
+INSERT IGNORE INTO `Roles` (`RoleName`,`RoleDescription`) VALUES ("Outro","Assuntos aleatórios");
+INSERT IGNORE INTO `Roles` (`RoleName`,`RoleDescription`) VALUES ("Desenvolvimento Sustentavel","Ajudam empresas a produzir de forma sustentavel");
+INSERT IGNORE INTO `Roles` (`RoleName`,`RoleDescription`) VALUES ("Negócios","habilidades relacionadas, para performances de alto nivel em determinadas tarefas.");
 -- -----------------------------------------------------
 -- Table `Detect`.`Supervisors`
 -- -----------------------------------------------------
 
 INSERT IGNORE INTO `Supervisors` (`SupervisorName`,`SupervisorCPF`,`SupervisorPassword`,`SupervisorUsername`,`SupervisorCompany`,`SupervisorPosition`) VALUES ("Charde",71912050247,"6713","et@duinec.ca",0,0);
-
+INSERT IGNORE INTO `Supervisors` (`SupervisorName`,`SupervisorCPF`,`SupervisorPassword`,`SupervisorUsername`,`SupervisorCompany`,`SupervisorPosition`) VALUES ("Regina Case",41815402199,"0666","esqenta@yahoo.co",0,0);
+INSERT IGNORE INTO `Supervisors` (`SupervisorName`,`SupervisorCPF`,`SupervisorPassword`,`SupervisorUsername`,`SupervisorCompany`,`SupervisorPosition`) VALUES ("Otto",07275680190,"1234","golem@pedra.to",0,0);
+INSERT IGNORE INTO `Supervisors` (`SupervisorName`,`SupervisorCPF`,`SupervisorPassword`,`SupervisorUsername`,`SupervisorCompany`,`SupervisorPosition`) VALUES ("Antonio",49818451112,"4321","toin@cjr.or",0,0);
+INSERT IGNORE INTO `Supervisors` (`SupervisorName`,`SupervisorCPF`,`SupervisorPassword`,`SupervisorUsername`,`SupervisorCompany`,`SupervisorPosition`) VALUES ("Pedro",12947869602,"1432","cheiroso@dez.ne",0,0);
 -- -----------------------------------------------------
 -- Table `Detect`.`Users`
 -- -----------------------------------------------------
 
-INSERT INTO `Users` (`UserName`) VALUES ("Selma"), ("Wilma");
+INSERT INTO `Users` (`UserName`) VALUES ("Selma");
+INSERT INTO `Users` (`UserName`) VALUES ("Velma");
+INSERT INTO `Users` (`UserName`) VALUES ("Fred");
+INSERT INTO `Users` (`UserName`) VALUES ("Daphne");
+INSERT INTO `Users` (`UserName`) VALUES ("Scooby");
+
 
 -- -----------------------------------------------------
 -- Table `Detect`.`FeatureTypes`
 -- -----------------------------------------------------
 
 INSERT IGNORE INTO `FeatureTypes` (`FeatureTypeName`,`FeatureTypeDescription`) VALUES ("Posting_Volume","Lorem ipsum");
+INSERT IGNORE INTO `FeatureTypes` (`FeatureTypeName`,`FeatureTypeDescription`) VALUES ("Posting_mass","Ipsum lorem");
+INSERT IGNORE INTO `FeatureTypes` (`FeatureTypeName`,`FeatureTypeDescription`) VALUES ("Posting_size","Losum iprem");
+INSERT IGNORE INTO `FeatureTypes` (`FeatureTypeName`,`FeatureTypeDescription`) VALUES ("Posting_density","Iprem losum");
+INSERT IGNORE INTO `FeatureTypes` (`FeatureTypeName`,`FeatureTypeDescription`) VALUES ("Posting_flavor","Lorem loren");
+INSERT IGNORE INTO `FeatureTypes` (`FeatureTypeName`,`FeatureTypeDescription`) VALUES ("Replies","Lorem loren");
+INSERT IGNORE INTO `FeatureTypes` (`FeatureTypeName`,`FeatureTypeDescription`) VALUES ("Questions","Lorem loren");
+INSERT IGNORE INTO `FeatureTypes` (`FeatureTypeName`,`FeatureTypeDescription`) VALUES ("PA","Lorem loren");
+INSERT IGNORE INTO `FeatureTypes` (`FeatureTypeName`,`FeatureTypeDescription`) VALUES ("NA","Lorem loren");
+
 
 -- -----------------------------------------------------
 -- Table `Detect`.`Features`
 -- -----------------------------------------------------
 
 INSERT IGNORE INTO `Features` (`FeatureType`,`Mean`,`MeanMomentum`,`Variance`,`Entropy`) VALUES (1,"0.99","0.09","0.41","0.96");
-
+INSERT IGNORE INTO `Features` (`FeatureType`,`Mean`,`MeanMomentum`,`Variance`,`Entropy`) VALUES (2,"0.98","0.08","0.40","0.95");
+INSERT IGNORE INTO `Features` (`FeatureType`,`Mean`,`MeanMomentum`,`Variance`,`Entropy`) VALUES (3,"0.97","0.07","0.39","0.94");
+INSERT IGNORE INTO `Features` (`FeatureType`,`Mean`,`MeanMomentum`,`Variance`,`Entropy`) VALUES (4,"0.96","0.06","0.38","0.93");
+INSERT IGNORE INTO `Features` (`FeatureType`,`Mean`,`MeanMomentum`,`Variance`,`Entropy`) VALUES (5,"0.95","0.05","0.37","0.99");
 
 -- -----------------------------------------------------
 -- Table `Detect`.`Platforms`
 -- -----------------------------------------------------
 
-INSERT INTO `Platforms` (`PlatformName`) VALUES ("Youtube"),("Orkut"),("Reddit"),("Facebook"),("Instagram");
-
+INSERT INTO `Platforms` (`PlatformName`) VALUES ("Youtube");
+INSERT INTO `Platforms` (`PlatformName`) VALUES ("Orkut");
+INSERT INTO `Platforms` (`PlatformName`) VALUES ("Reddit");
+INSERT INTO `Platforms` (`PlatformName`) VALUES ("Facebook");
+INSERT INTO `Platforms` (`PlatformName`) VALUES ("Instagram");
 
 -- -----------------------------------------------------
 -- Associative Table `Detect`.`Relationships`
 -- -----------------------------------------------------
 
 INSERT INTO `Posts` (`PostText`, `PostLikes`, `Shares`, `Emotion`) VALUES ("Lorem Ipsum",1, 2, "Joy");
-
+INSERT INTO `Posts` (`PostText`, `PostLikes`, `Shares`, `Emotion`) VALUES ("hoje eu to legal.", 0, 0, "Indifference");
+INSERT INTO `Posts` (`PostText`, `PostLikes`, `Shares`, `Emotion`) VALUES ("Olha o meu almoço que interessante!", 300, 2, "Habituation");
+INSERT INTO `Posts` (`PostText`, `PostLikes`, `Shares`, `Emotion`) VALUES ("Motivos para viajar para Manaus [parte 5]",7000000, 13954, "Curiosity");
+INSERT INTO `Posts` (`PostText`, `PostLikes`, `Shares`, `Emotion`) VALUES ("Alguem sabe o nome desse moreninho de Ciencia da Computação?",22, 0, "Love");
 -- -----------------------------------------------------
 -- Table `Detect`.`RelTypes`
 -- -----------------------------------------------------
 
-INSERT INTO `RelTypes` (`RelTypeName`,`RelTypeDescription`) VALUES ("friend of friend","Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur"),("friend","Lorem ipsum dolor sit amet,"),("acquaintance","Lorem ipsum dolor"),("follower","Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed");
-
+INSERT INTO `RelTypes` (`RelTypeName`,`RelTypeDescription`) VALUES ("friend of friend","Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur");
+INSERT INTO `RelTypes` (`RelTypeName`,`RelTypeDescription`) VALUES ("friend","Lorem ipsum dolor sit amet,");
+INSERT INTO `RelTypes` (`RelTypeName`,`RelTypeDescription`) VALUES ("acquaintance","Lorem ipsum dolor");
+INSERT INTO `RelTypes` (`RelTypeName`,`RelTypeDescription`) VALUES ("follower","Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed");
+INSERT INTO `RelTypes` (`RelTypeName`,`RelTypeDescription`) VALUES ("same community","Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed");
 
 -- -----------------------------------------------------
 -- Associative Table `Detect`.`Relationships`
 -- -----------------------------------------------------
 
-INSERT INTO `Relationships` (`FriendId`,`RelType`) VALUES (1,1), (2,1), (1,1);
+INSERT INTO `Relationships` (`FriendId`,`RelType`) VALUES (1,1);
+INSERT INTO `Relationships` (`FriendId`,`RelType`) VALUES (2,2);
+INSERT INTO `Relationships` (`FriendId`,`RelType`) VALUES (3,3);
+INSERT INTO `Relationships` (`FriendId`,`RelType`) VALUES (4,4);
+INSERT INTO `Relationships` (`FriendId`,`RelType`) VALUES (5,5);
+
 
 -- -----------------------------------------------------
 -- Associative Table `Detect`.`User_Platform`
 -- -----------------------------------------------------
 
 INSERT INTO `User_Platform` (`UserId`,`PlatformId`,`Features`,`Relationships`, `PostId`) VALUES (1,1,1,1,1);
-
+INSERT INTO `User_Platform` (`UserId`,`PlatformId`,`Features`,`Relationships`, `PostId`) VALUES (2,3,4,5,5);
+INSERT INTO `User_Platform` (`UserId`,`PlatformId`,`Features`,`Relationships`, `PostId`) VALUES (3,4,5,3,4);
+INSERT INTO `User_Platform` (`UserId`,`PlatformId`,`Features`,`Relationships`, `PostId`) VALUES (4,5,2,4,3);
+INSERT INTO `User_Platform` (`UserId`,`PlatformId`,`Features`,`Relationships`, `PostId`) VALUES (5,2,3,2,2);
 
 -- FINISHED POPULATING THE DATABASE -------------------------------
 
