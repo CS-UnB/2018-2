@@ -375,6 +375,7 @@ INSERT INTO `Relationships` (`FriendId`,`RelType`) VALUES (3,3);
 INSERT INTO `Relationships` (`FriendId`,`RelType`) VALUES (4,4);
 INSERT INTO `Relationships` (`FriendId`,`RelType`) VALUES (5,5);
 
+
 -- -----------------------------------------------------
 -- Associative Table `Detect`.`User_Platform`
 -- -----------------------------------------------------
