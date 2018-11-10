@@ -250,7 +250,7 @@ CREATE TABLE IF NOT EXISTS `Detect`.`User_Platform` (
  
  CONSTRAINT `Relationships`
  FOREIGN KEY (`Relationships`)
- REFERENCES `Detect`.`Realationships` (`RelId`)
+ REFERENCES `Detect`.`Relationships` (`RelId`)
  ON DELETE RESTRICT
  ON UPDATE RESTRICT,
  
@@ -333,8 +333,7 @@ INSERT INTO `RelTypes` (`RelTypeName`,`RelTypeDescription`) VALUES ("friend of f
 -- Associative Table `Detect`.`Relationships`
 -- -----------------------------------------------------
 
-INSERT INTO `Relationships` (`FriendId`,`RelType`) VALUES (1,1), (2,1);
-
+INSERT INTO `Relationships` (`FriendId`,`RelType`) VALUES (1,1), (2,1), (1,1);
 
 -- -----------------------------------------------------
 -- Associative Table `Detect`.`User_Platform`
