@@ -4,103 +4,102 @@
 #include <pthread.h>
 #include <semaphore.h>
 #include <time.h>
-
-#define MAX_CHILDREN_IN_A_RIDE 15
-#define MIN_CHILDREN_IN_A_RIDE 5
+#define MAX_CHILDREN_IN_RIDE 18
+#define MIN_CHILDREN_IN_RIDE 8
+#define N_OPERATORS 10
+#define N_CHILDREN 355
 #define N_RIDES 5
-#define N_CHILDREN 100
-#define RIDE_TIME 5
-#define true 1
-#define false 0
-typedef int bool;
+#define RIDING_TIME 2
 
-sem_t rideSemaphore[N_RIDES];				
-sem_t childEnjoysRide[N_RIDES];
+sem_t operator_SEM[N_RIDES];				/*initialize with 0, binary semaphore*/
+sem_t childrenEnjoyRide_SEM[N_RIDES];		/*initialize with 0, binary semaphore*/
 pthread_mutex_t MUTEX[N_RIDES];
-pthread_mutex_t MUTEX_CHILDREN[N_RIDES];
+pthread_mutex_t MUTEX_Children[N_RIDES];
 int childrenInRide[N_RIDES];
-int actualNumberOfChildrenInRide[N_RIDES];
-bool riding[N_RIDES] = {[0 ... (N_RIDES-1)] = false};
+int record_childrenInRide[N_RIDES];
+int ride[N_RIDES];
 time_t t;
 
-void * switcher_THREAD(void *id){
-	const int rideId = *(int*) id;
-	const int rideTime = ((int)drand48()*100) % N_RIDES;
-	const int maxAge = 20;
-	const int minAge = 4;
-	const int rideBestSuitedForAgesUpTo = minAge + ((int)(drand48()*100) % (maxAge - minAge));
-
+void * operator_THREAD(void *arg){
+	int const profId = *(int*) arg;
+	int operatorsRideOfChoice = 0;
 	while(1){
-		sem_wait(&rideSemaphore[rideId]);
-		pthread_mutex_lock(&MUTEX[rideId]);
-		riding[rideId] = true;
-		if(childrenInRide[rideId] < MAX_CHILDREN_IN_A_RIDE){
-			riding[rideId] = false;
-			printf("\n\n\n############# RIDE ID %d ####################################\n# "
-			"\n#\t %d CHILDREN waiting to ride\n#\tLet's wait a bit for more children..."
-			"\n#####################################################################\n\n\n ", rideId, childrenInRide[rideId]);
-			sleep(3);
-		}
-		riding[rideId] = true; 
-		printf("\n\n\n################ RIDE ID %d #####################################\n# "
-			"\n#\t %d CHILDREN waiting to ride\n#\tLet's get the ride started!...\n#\n#\n#\t\t\t$$$$$$ RIDING! $$$$$$\n#\n#\n#"
-			"\n#####################################################################\n\n\n ", rideId, childrenInRide[rideId]);
-		sleep(RIDE_TIME);
+		operatorsRideOfChoice = (profId+ ((int)(drand48()*100))) % N_RIDES;
+		sem_wait(&operator_SEM[operatorsRideOfChoice]);
+		if((ride[operatorsRideOfChoice] == 0) && (0 == pthread_mutex_trylock(&MUTEX[operatorsRideOfChoice]))){
+			ride[operatorsRideOfChoice] = 1;
+			if(childrenInRide[operatorsRideOfChoice] < MAX_CHILDREN_IN_RIDE){
+				ride[operatorsRideOfChoice] = 0;
 
-		for(int i = 0; i < actualNumberOfChildrenInRide[rideId]; i++){
-			sem_post(&childEnjoysRide[rideId]);
+				printf("\n\n\n######################################### Operator %d - Ride %d ################"
+				"#############################################\n# "
+				"\n#\t %d Children in this ride\n#\tLet's see if more arrive..."
+				"\n###########################################################################################"
+				"##################################\n\n\n ", profId, operatorsRideOfChoice, childrenInRide[operatorsRideOfChoice]);
+				sleep(1);
+			}
+			ride[operatorsRideOfChoice] = 1; /*Funcionário fecha a porta do brinquedo*/ 
+			printf("\n\n\n######################################### Operator %d - Ride %d ####################"
+			"#########################################\n# "
+				"\n#\t %d Children in this ride\n#\tLet's get the ride started...\n#\n#\n#\t\t\t$$$$$$ RIDING $$$$$$\n#\n#\n#"
+				"\n###########################################################################################"
+				"##################################\n\n\n ", profId, operatorsRideOfChoice, childrenInRide[operatorsRideOfChoice]);
+			
+			sleep(RIDING_TIME);
+			for(int i = 0; i < record_childrenInRide[operatorsRideOfChoice]; i++){
+				sem_post(&childrenEnjoyRide_SEM[operatorsRideOfChoice]);
+			}
+			pthread_mutex_unlock(&MUTEX[operatorsRideOfChoice]);
 		}
-		actualNumberOfChildrenInRide[rideId] = 0;
-		pthread_mutex_unlock(&MUTEX[rideId]);
 	}
 }
 
-void * child_THREAD(void *id){
-	const int childId = *(int*) id;
-	const int minAge = 4;
-	const int maxAge = 20;
-	const int timeToBoard = ((int)(drand48()*100)) % N_RIDES;
-	const int age = (minAge + ((int)(drand48()*100))) % maxAge;
-	int rideOfChoice = (childId + ((int)(drand48()*100))) % N_RIDES;
+void * child_THREAD(void *arg){
+	int alunoId = *(int*) arg;
+	int childrensRideOfChoice = 0;
 	while(1){
-		pthread_mutex_lock(&MUTEX_CHILDREN[rideOfChoice]);
-		if((childrenInRide[rideOfChoice] < MAX_CHILDREN_IN_A_RIDE) && (riding[rideOfChoice] == false)) {
+		childrensRideOfChoice = (alunoId+ ((int)(drand48()*100))) % N_RIDES;
+		pthread_mutex_lock(&MUTEX_Children[childrensRideOfChoice]);
+		if((childrenInRide[childrensRideOfChoice] < MAX_CHILDREN_IN_RIDE) && (ride[childrensRideOfChoice] == 0)) {
+			childrenInRide[childrensRideOfChoice]++;
+			record_childrenInRide[childrensRideOfChoice]++;
+
+			printf("\n\t> Child %d:\n\t\tThere are %d empty seats in RIDE %d. I'll take one", *(int*) arg, 
+					(MAX_CHILDREN_IN_RIDE - childrenInRide[childrensRideOfChoice]), childrensRideOfChoice);
+			if(childrenInRide[childrensRideOfChoice] == MIN_CHILDREN_IN_RIDE){
+				printf("\n\n\n#################################################################################"
+				"##############################################\n# "
+					"\t\t\t\tThere are enough children in RIDE %d.\n#\t\t\t\tThe operator will take his place."
+					"\n########################################################################################"
+					"#######################################\n\n\n", childrensRideOfChoice);
+				sem_post(&operator_SEM[childrensRideOfChoice]);
+			}
+			else if(childrenInRide[childrensRideOfChoice] == MAX_CHILDREN_IN_RIDE){
+				printf("\n\n\n#################################################################################"
+				"##############################################\n# "
+					"\t\t\t\tRIDE %d is crowded. Children get ready for the ride."
+					"\n#########################################################################################"
+					"######################################\n\n\n", childrensRideOfChoice);
+			}
 			
-			sleep(timeToBoard);
-			childrenInRide[rideOfChoice]++;
-			actualNumberOfChildrenInRide[rideOfChoice]++;
-			printf("\n\t\t> CHILD %d:\n\t\tThere are %d seats available in ride %d... I'll take one", (int) childId, (MAX_CHILDREN_IN_A_RIDE - childrenInRide[rideOfChoice]), rideOfChoice);
-			if(childrenInRide[rideOfChoice] == MIN_CHILDREN_IN_A_RIDE){
-				printf("\n\n\n######################################################################\n# "
-					"\t\t\t\tThere are %d children in the ride, enough to start it!.\n#\t\t\t\tTell the SWITCHER to get it going!!."
-					"\n#############################################################################\n\n\n", rideOfChoice);
-				sem_post(&rideSemaphore[rideOfChoice]);
+			pthread_mutex_unlock(&MUTEX_Children[childrensRideOfChoice]);
+			sem_wait(&childrenEnjoyRide_SEM[childrensRideOfChoice]);
+			//assiteAula();
+			/*ALUNOS start to leave the classroom*/
+			pthread_mutex_lock(&MUTEX_Children[childrensRideOfChoice]);
+			printf("\n\t\t< CHILD %d:\n\t\t\tLeaving RIDE %d...", *(int*) arg, childrensRideOfChoice);
+			childrenInRide[childrensRideOfChoice]--;
+			if(childrenInRide[childrensRideOfChoice] == 0){
+				printf("\n\t\t\t\tLAST child to leave RIDE %d...",childrensRideOfChoice);
+				record_childrenInRide[childrensRideOfChoice] = 0;
+				ride[childrensRideOfChoice] = 0;
 			}
-			else if(childrenInRide[rideOfChoice] == MAX_CHILDREN_IN_A_RIDE){
-				printf("\n\n\n#######################################################################\n# "
-					"\t\t\t\tRIDE %d is full. Cannot fit anybody else!"
-					"\n##############################################################################\n\n\n", rideOfChoice);
-			}
-			pthread_mutex_unlock(&MUTEX_CHILDREN[rideOfChoice]);
-			sem_wait(&childEnjoysRide[rideOfChoice]);
-			//child has fun!;
-			/* the ride is over
-				the children start to leave the ride*/
-			pthread_mutex_lock(&MUTEX_CHILDREN[rideOfChoice]);
-			printf("\n\t\t< CHILD %d:\n\t\t\tLeaving RIDE %d...", (int) childId, rideOfChoice);
-			childrenInRide[rideOfChoice]--;
-			if(childrenInRide[rideOfChoice] == 0){
-				printf("\n\t\t\t\tLast kid to leave RIDE %d...",rideOfChoice);
-				actualNumberOfChildrenInRide[rideOfChoice] = 0;
-				riding[rideOfChoice] = false;
-			}
-			pthread_mutex_unlock(&MUTEX_CHILDREN[rideOfChoice]);
+			pthread_mutex_unlock(&MUTEX_Children[childrensRideOfChoice]);
 			
 			
 		}
 		else{
-			// the ride is crowded, the child goes to another one.
-			pthread_mutex_unlock(&MUTEX_CHILDREN[rideOfChoice]);
+			pthread_mutex_unlock(&MUTEX_Children[childrensRideOfChoice]);
 		}
 	}
 }
@@ -109,38 +108,38 @@ void * child_THREAD(void *id){
 int main(){
 	int i;
 	int *id;
-	pthread_t switcher[N_RIDES];
-	pthread_t child[N_CHILDREN];
+	pthread_t professores[N_OPERATORS];
+	pthread_t alunos[N_CHILDREN];
 
 	/*iniciando variaveis*/
 	srand((unsigned) time(&t));
 	for(i = 0; i < N_RIDES; i++)
-		sem_init(&rideSemaphore[i], 0, 0);
+		sem_init(&operator_SEM[i], 0, 0);
 	for(i = 0; i < N_RIDES; i++)
-		sem_init(&childEnjoysRide[i], 0, 0);
+		sem_init(&childrenEnjoyRide_SEM[i], 0, 0);
 	for(i = 0; i < N_RIDES; i++)
 		pthread_mutex_init(&MUTEX[i], 0);
 	for(i = 0; i < N_RIDES; i++)
-		pthread_mutex_init(&MUTEX_CHILDREN[i], 0);
+		pthread_mutex_init(&MUTEX_Children[i], 0);
 	for(i = 0; i < N_RIDES; i++)
 		childrenInRide[i] = 0;
 	for(i = 0; i < N_RIDES; i++)
-		riding[i] = 0;
+		ride[i] = 0;
 	for(i = 0; i < N_RIDES; i++)
-		actualNumberOfChildrenInRide[i] = 0;
+		record_childrenInRide[i] = 0;
 	/*FIM_iniciando variaveis*/
 
 	/*criando THREADS*/
 	for(i = 0; i < N_CHILDREN; i++){
 		id = (int *) malloc(sizeof(int));
 		*id = i;
-		pthread_create(&child[i], NULL, child_THREAD, (void*) id);
+		pthread_create(&alunos[i], NULL, child_THREAD, (void*) id);
 	}
-	for(i = 0; i < N_RIDES; i++){
+	for(i = 0; i < N_OPERATORS; i++){
 		id = (int *) malloc(sizeof(int));
 		*id = i;
-		pthread_create(&switcher[i], NULL, switcher_THREAD, (void*) id);
+		pthread_create(&professores[i], NULL, operator_THREAD, (void*) id);
 	}
 	/*FIM_criando THREADS*/
-	pthread_join(child[0], NULL);
+	pthread_join(alunos[0], NULL);
 }
