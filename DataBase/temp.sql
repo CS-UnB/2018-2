@@ -57,7 +57,7 @@ DROP TABLE IF EXISTS `Detect`.`Supervisors` ;
 CREATE TABLE IF NOT EXISTS `Detect`.`Supervisors` (
  `SupervisorId` INT NOT NULL AUTO_INCREMENT,
  `SupervisorName` VARCHAR(255) NOT NULL,
- `SupervisorCPF` INT NOT NULL UNIQUE,
+ `SupervisorCPF` VARCHAR(11) NOT NULL UNIQUE,
  `SupervisorPassword` VARCHAR(32) NOT NULL,
  `SupervisorUsername` VARCHAR(20) NOT NULL UNIQUE,
  `SupervisorCompany` INT NOT NULL,
@@ -295,11 +295,11 @@ INSERT IGNORE INTO `Roles` (`RoleName`,`RoleDescription`) VALUES ("Negócios","h
 -- Table `Detect`.`Supervisors`
 -- -----------------------------------------------------
 
-INSERT IGNORE INTO `Supervisors` (`SupervisorName`,`SupervisorCPF`,`SupervisorPassword`,`SupervisorUsername`,`SupervisorCompany`,`SupervisorPosition`) VALUES ("Charde",71912050247,"6713","et@duinec.ca",0,0);
-INSERT IGNORE INTO `Supervisors` (`SupervisorName`,`SupervisorCPF`,`SupervisorPassword`,`SupervisorUsername`,`SupervisorCompany`,`SupervisorPosition`) VALUES ("Regina Case",41815402199,"0666","esqenta@yahoo.co",0,0);
-INSERT IGNORE INTO `Supervisors` (`SupervisorName`,`SupervisorCPF`,`SupervisorPassword`,`SupervisorUsername`,`SupervisorCompany`,`SupervisorPosition`) VALUES ("Otto",07275680190,"1234","golem@pedra.to",0,0);
-INSERT IGNORE INTO `Supervisors` (`SupervisorName`,`SupervisorCPF`,`SupervisorPassword`,`SupervisorUsername`,`SupervisorCompany`,`SupervisorPosition`) VALUES ("Antonio",49818451112,"4321","toin@cjr.or",0,0);
-INSERT IGNORE INTO `Supervisors` (`SupervisorName`,`SupervisorCPF`,`SupervisorPassword`,`SupervisorUsername`,`SupervisorCompany`,`SupervisorPosition`) VALUES ("Pedro",12947869602,"1432","cheiroso@dez.ne",0,0);
+INSERT IGNORE INTO `Supervisors` (`SupervisorName`,`SupervisorCPF`,`SupervisorPassword`,`SupervisorUsername`,`SupervisorCompany`,`SupervisorPosition`) VALUES ("Charde","71912050247","6713","et@duinec.ca",1,5);
+INSERT IGNORE INTO `Supervisors` (`SupervisorName`,`SupervisorCPF`,`SupervisorPassword`,`SupervisorUsername`,`SupervisorCompany`,`SupervisorPosition`) VALUES ("Regina Case","41815402199","0666","esqenta@yahoo.co",1,4);
+INSERT IGNORE INTO `Supervisors` (`SupervisorName`,`SupervisorCPF`,`SupervisorPassword`,`SupervisorUsername`,`SupervisorCompany`,`SupervisorPosition`) VALUES ("Otto","07275680190","1234","golem@pedra.to",2,2);
+INSERT IGNORE INTO `Supervisors` (`SupervisorName`,`SupervisorCPF`,`SupervisorPassword`,`SupervisorUsername`,`SupervisorCompany`,`SupervisorPosition`) VALUES ("Antonio","49818451112","4321","toin@cjr.or",3,3);
+INSERT IGNORE INTO `Supervisors` (`SupervisorName`,`SupervisorCPF`,`SupervisorPassword`,`SupervisorUsername`,`SupervisorCompany`,`SupervisorPosition`) VALUES ("Pedro","12947869602","1432","cheiroso@dez.ne",4,3);
 -- -----------------------------------------------------
 -- Table `Detect`.`Users`
 -- -----------------------------------------------------
