@@ -34,18 +34,12 @@ WHERE Shares>=x OR PostLikes>=y;
 SELECT PostText FROM Posts WHERE
 Emotion='Sadness' OR Emotion='Hate';
 
--- Talvez devessemos acrescentar a coluna User_Id ou UserName na tabela Posts
+-- New Post arrive in the DB
+INSERT INTO `Posts` (`PostText`, `PostLikes`, `Shares`, `Emotion`) VALUES ("PostText",Likes, Shares, "Feeling");
+INSERT INTO `User_Platform` (`UserId`,`PlatformId`,`Features`,`Relationships`, `Posts`) VALUES (UserId,PlatformId,Features,Relationships,PostId);
 
 
 
-
-
--- FEATURES QUERYS (WARNING: 3)
-
--- Get the numbers on Feature Type <X>
-SELECT FeatureTypes.FeatureTypeName, Features.Mean, Features.MeanMomentum, Features.Variance, Features.Entropy
-FROM Features INNER JOIN FeatureTypes
-ON Features.FeatureType=FeatureTypes.FeatureTypeID WHERE FeatureId=<X>;
 
 
 
@@ -57,9 +51,15 @@ FROM ((User_Platform
 INNER JOIN Users
 ON User_Platform.UserId = Users.UserId)
 INNER JOIN Posts
-ON User_Platform.PostId = Posts.PostId);
+ON User_Platform.Posts = Posts.PostId);
 
 
+-- FEATURES QUERYS (WARNING: 3)
+
+-- Get the numbers on Feature Type <X>
+SELECT FeatureTypes.FeatureTypeName, Features.Mean, Features.MeanMomentum, Features.Variance, Features.Entropy
+FROM Features INNER JOIN FeatureTypes
+ON Features.FeatureType=FeatureTypes.FeatureTypeID WHERE FeatureId=<X>;
 
 
 -- (1) TABELA COMPANIES ISOLADA DAS OUTRAS (Recomendacao: Deleta-la)

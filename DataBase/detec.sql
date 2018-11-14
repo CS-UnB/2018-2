@@ -380,9 +380,9 @@ CREATE TABLE IF NOT EXISTS `Detect`.`User_Platform` (
  `UserId` INT NOT NULL,
  `PlatformId` INT NOT NULL,
  `Features` INT NOT NULL,
- `Relationships` INT NOT NULL,
+ `Relationships` INT,
  `Supervisors` INT,
- `Posts` INT,
+ `Posts` INT NOT NULL,
  PRIMARY KEY (`User_PlatformId`),
  
  INDEX `UserId_idx` (`UserId` ASC),
@@ -642,6 +642,19 @@ INSERT INTO `Posts` (`PostText`, `PostLikes`, `Shares`, `Emotion`) VALUES ("hoje
 INSERT INTO `Posts` (`PostText`, `PostLikes`, `Shares`, `Emotion`) VALUES ("Olha o meu almoço que interessante!", 300, 2, "Habituation");
 INSERT INTO `Posts` (`PostText`, `PostLikes`, `Shares`, `Emotion`) VALUES ("Motivos para viajar para Manaus [parte 5]",7000000, 13954, "Curiosity");
 INSERT INTO `Posts` (`PostText`, `PostLikes`, `Shares`, `Emotion`) VALUES ("Alguem sabe o nome desse moreninho de Ciencia da Computação?",22, 0, "Love");
+INSERT INTO `Posts` (`PostText`, `PostLikes`, `Shares`, `Emotion`) VALUES ("Mano kd o Salsicha??? Eu quero morre!",1000, 2, "Sorrow");
+INSERT INTO `Posts` (`PostText`, `PostLikes`, `Shares`, `Emotion`) VALUES ("Malhando insano aqui galera!",1, 2, "Contentment");
+INSERT INTO `Posts` (`PostText`, `PostLikes`, `Shares`, `Emotion`) VALUES ("Gente vai começar o Globo Rural!",100000, 20000, "Contentment");
+INSERT INTO `Posts` (`PostText`, `PostLikes`, `Shares`, `Emotion`) VALUES ("Recomendações de sachê de maionese?",1, 2, "Curiosity");
+INSERT INTO `Posts` (`PostText`, `PostLikes`, `Shares`, `Emotion`) VALUES ("Se o Nolsobaro ganhar, vai ter Columbine na UnP!!! ",9, 11, "Hate");
+INSERT INTO `Posts` (`PostText`, `PostLikes`, `Shares`, `Emotion`) VALUES ("Vendo NoteBook intel celeron 4 GB de RAM com 7 anos de uso...",1, 2, "Advertising");
+INSERT INTO `Posts` (`PostText`, `PostLikes`, `Shares`, `Emotion`) VALUES ("Choque de cultura é muito sem graça vei!",22, 0, "Aversion");
+INSERT INTO `Posts` (`PostText`, `PostLikes`, `Shares`, `Emotion`) VALUES ("177013 Macabro",0, 0, "Unknown");
+INSERT INTO `Posts` (`PostText`, `PostLikes`, `Shares`, `Emotion`) VALUES ("OdEiO uVa PasSa!!",1, 0, "Joy");
+INSERT INTO `Posts` (`PostText`, `PostLikes`, `Shares`, `Emotion`) VALUES ("Ouvindo Alcione pra relaxar",20000, 600, "Joy");
+INSERT INTO `Posts` (`PostText`, `PostLikes`, `Shares`, `Emotion`) VALUES ("#Caldascountry2018",300, 2, "Excitement");
+INSERT INTO `Posts` (`PostText`, `PostLikes`, `Shares`, `Emotion`) VALUES ("Um Like e eu me mato!",300, 2, "Sorrow");
+INSERT INTO `Posts` (`PostText`, `PostLikes`, `Shares`, `Emotion`) VALUES ("Gente meu tio morreu! #chateada",300, 2, "Sorrow");
 
 -- -----------------------------------------------------
 -- Table `Detect`.`RelTypes`
@@ -667,11 +680,24 @@ INSERT INTO `Relationships` (`RelType`) VALUES (5);
 -- Associative Table `Detect`.`User_Platform`
 -- -----------------------------------------------------
 
-INSERT INTO `User_Platform` (`UserId`,`PlatformId`,`Features`,`Relationships`) VALUES (1,1,1,1);
-INSERT INTO `User_Platform` (`UserId`,`PlatformId`,`Features`,`Relationships`) VALUES (2,3,4,5);
-INSERT INTO `User_Platform` (`UserId`,`PlatformId`,`Features`,`Relationships`) VALUES (3,4,5,3);
-INSERT INTO `User_Platform` (`UserId`,`PlatformId`,`Features`,`Relationships`) VALUES (4,5,2,4);
-INSERT INTO `User_Platform` (`UserId`,`PlatformId`,`Features`,`Relationships`) VALUES (5,2,3,2);
+INSERT INTO `User_Platform` (`UserId`,`PlatformId`,`Features`,`Relationships`, `Posts`) VALUES (1,1,1,1,5);
+INSERT INTO `User_Platform` (`UserId`,`PlatformId`,`Features`,`Relationships`, `Posts`) VALUES (2,3,4,5,4);
+INSERT INTO `User_Platform` (`UserId`,`PlatformId`,`Features`,`Relationships`, `Posts`) VALUES (3,4,5,3,3);
+INSERT INTO `User_Platform` (`UserId`,`PlatformId`,`Features`,`Relationships`, `Posts`) VALUES (4,5,2,4,2);
+INSERT INTO `User_Platform` (`UserId`,`PlatformId`,`Features`,`Relationships`, `Posts`) VALUES (5,2,3,2,1);
+INSERT INTO `User_Platform` (`UserId`,`PlatformId`,`Features`,`Relationships`, `Posts`) VALUES (1,2,3,2,11);
+INSERT INTO `User_Platform` (`UserId`,`PlatformId`,`Features`,`Relationships`, `Posts`) VALUES (1,2,3,2,17);
+INSERT INTO `User_Platform` (`UserId`,`PlatformId`,`Features`,`Relationships`, `Posts`) VALUES (2,2,3,2,8);
+INSERT INTO `User_Platform` (`UserId`,`PlatformId`,`Features`,`Relationships`, `Posts`) VALUES (2,2,3,2,15);
+INSERT INTO `User_Platform` (`UserId`,`PlatformId`,`Features`,`Relationships`, `Posts`) VALUES (3,2,3,2,7);
+INSERT INTO `User_Platform` (`UserId`,`PlatformId`,`Features`,`Relationships`, `Posts`) VALUES (3,2,3,2,16);
+INSERT INTO `User_Platform` (`UserId`,`PlatformId`,`Features`,`Relationships`, `Posts`) VALUES (4,2,3,2,9);
+INSERT INTO `User_Platform` (`UserId`,`PlatformId`,`Features`,`Relationships`, `Posts`) VALUES (4,2,3,2,12);
+INSERT INTO `User_Platform` (`UserId`,`PlatformId`,`Features`,`Relationships`, `Posts`) VALUES (4,2,3,2,18);
+INSERT INTO `User_Platform` (`UserId`,`PlatformId`,`Features`,`Relationships`, `Posts`) VALUES (4,2,3,2,14);
+INSERT INTO `User_Platform` (`UserId`,`PlatformId`,`Features`,`Relationships`, `Posts`) VALUES (5,2,3,2,10);
+INSERT INTO `User_Platform` (`UserId`,`PlatformId`,`Features`,`Relationships`, `Posts`) VALUES (5,2,3,2,13);
+INSERT INTO `User_Platform` (`UserId`,`PlatformId`,`Features`,`Relationships`, `Posts`) VALUES (5,2,3,2,6);
 
 -- -----------------------------------------------------
 -- Table `Detect`.`Users`
