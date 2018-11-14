@@ -100,7 +100,6 @@ CREATE TABLE IF NOT EXISTS `Detect`.`Users` (
   -- `UserNeighborhood` INT NOT NULL,
   -- `UserState` INT NOT NULL,
   `UserFone_id` INT NOT NULL,
-  -- `UserFU` INT NOT NULL,            			-- Unidade Federativa --
   `UserCountry_id` INT NOT NULL,
   -- `UserEMail` INT NOT NULL,
   -- `UserSchooling` INT NOT NULL,     			-- Escolaridade --
