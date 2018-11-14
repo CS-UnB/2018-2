@@ -57,7 +57,7 @@ DROP TABLE IF EXISTS `Detect`.`Supervisors` ;
 CREATE TABLE IF NOT EXISTS `Detect`.`Supervisors` (
  `SupervisorId` INT NOT NULL AUTO_INCREMENT,
  `SupervisorName` VARCHAR(255) NOT NULL,
- `SupervisorCPF` INT NOT NULL UNIQUE,
+ `SupervisorCPF` VARCHAR(11) NOT NULL UNIQUE,
  `SupervisorPassword` VARCHAR(32) NOT NULL,
  `SupervisorUsername` VARCHAR(20) NOT NULL UNIQUE,
  `SupervisorCompany` INT NOT NULL,
@@ -89,6 +89,22 @@ DROP TABLE IF EXISTS `Detect`.`Users` ;
 CREATE TABLE IF NOT EXISTS `Detect`.`Users` (
  `UserId` INT NOT NULL AUTO_INCREMENT,
  `UserName` VARCHAR(255) NOT NULL,
+
+ `UserCPF` VARCHAR(11) NOT NULL,
+ `UserIdentity` VARCHAR(255) NOT NULL,
+  -- `UserFiliation` INT NOT NULL,
+  `UserGender_id` INT NOT NULL,
+  `UserCivilStatus_id` INT NOT NULL,
+  -- `UserNaturality` INT NOT NULL,
+  `UserCity_id` INT NOT NULL,
+  -- `UserNeighborhood` INT NOT NULL,
+  -- `UserState` INT NOT NULL,
+  `UserFone_id` INT NOT NULL,
+  `UserCountry_id` INT NOT NULL,
+  -- `UserEMail` INT NOT NULL,
+  -- `UserSchooling` INT NOT NULL,     			-- Escolaridade --
+  -- `UserRole` VARCHAR(255) NOT NULL,			-- Cargo --
+ 
  `User_PlatformIdUser` INT,
  PRIMARY KEY (`UserId`),
  
@@ -98,8 +114,140 @@ CREATE TABLE IF NOT EXISTS `Detect`.`Users` (
  FOREIGN KEY (`User_PlatformIdUser`)
  REFERENCES `Detect`.`User_Platform` (`User_PlatformId`)
  ON DELETE RESTRICT
+ ON UPDATE RESTRICT,
+ 
+  CONSTRAINT `Gender`
+ FOREIGN KEY (`UserGender_id`)
+ REFERENCES `Detect`.`Gender` (`GenderId`)
+ ON DELETE RESTRICT
+ ON UPDATE RESTRICT,
+
+ CONSTRAINT `UserFone_id`
+ FOREIGN KEY (`UserFone_id`)
+ REFERENCES `Detect`.`Fone` (`FoneId`)
+ ON DELETE RESTRICT
+ ON UPDATE RESTRICT,
+
+ CONSTRAINT `UserCountry_id`
+ FOREIGN KEY (`UserCountry_id`)
+ REFERENCES `Detect`.`Country` (`CountryId`)
+ ON DELETE RESTRICT
+ ON UPDATE RESTRICT,
+ 
+  CONSTRAINT `UserCity_id`
+ FOREIGN KEY (`UserCity_id`)
+ REFERENCES `Detect`.`City` (`CityId`)
+ ON DELETE RESTRICT
+ ON UPDATE RESTRICT,
+
+ CONSTRAINT `UserCivilStatus_id`
+ FOREIGN KEY (`UserCivilStatus_id`)
+ REFERENCES `Detect`.`CivilStatus` (`CivilStatusId`)
+ ON DELETE RESTRICT
  ON UPDATE RESTRICT
  );
+
+
+-- -----------------------------------------------------
+--  Table `Detect`.`CivilStatus`
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `Detect`.`CivilStatus`;
+
+CREATE TABLE IF NOT EXISTS `Detect`.`CivilStatus` (
+ `CivilStatusId` INT NOT NULL AUTO_INCREMENT,
+ `CivilStatusDescription` VARCHAR(255),
+ PRIMARY KEY (`CivilStatusId`)
+);
+-- -----------------------------------------------------
+--  Table `Detect`.`Country`
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `Detect`.`Country`;
+
+CREATE TABLE IF NOT EXISTS `Detect`.`Country` (
+ `CountryId` INT NOT NULL AUTO_INCREMENT,
+ `CountryDescription` VARCHAR(255),
+ PRIMARY KEY (`CountryId`)
+);
+
+-- -----------------------------------------------------
+--  Table `Detect`.`Gender`
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `Detect`.`Gender`;
+
+CREATE TABLE IF NOT EXISTS `Detect`.`Gender` (
+ `GenderId` INT NOT NULL AUTO_INCREMENT,
+ `GenderDescription` VARCHAR(255),
+ PRIMARY KEY (`GenderId`)
+);
+-- -----------------------------------------------------
+--  Table `Detect`.`TypeFone`
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `Detect`.`TypeFone`;
+
+CREATE TABLE IF NOT EXISTS `Detect`.`TypeFone` (
+ `TypeFoneId` INT NOT NULL AUTO_INCREMENT,
+ `TypeFoneDescription` VARCHAR(255),
+ PRIMARY KEY (`typeFoneId`)
+);
+-- -----------------------------------------------------
+--  Table `Detect`.`Fone`
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `Detect`.`Fone`;
+
+CREATE TABLE IF NOT EXISTS `Detect`.`Fone` (
+ `FoneId` INT NOT NULL AUTO_INCREMENT,
+ `FoneNumber` VARCHAR(15),
+ `FoneTypeFone_id` INT NOT NULL,
+ PRIMARY KEY (`FoneId`),
+
+ -- INDEX `FoneTypeFone_idx` (`TypeFone` ASC),
+
+ CONSTRAINT `FoneTypeFone_id`
+ FOREIGN KEY (`FoneTypeFone_id`)
+ REFERENCES `Detect`.`TypeFone` (`TypeFoneId`)
+ ON DELETE RESTRICT
+ ON UPDATE RESTRICT
+
+);
+-- -----------------------------------------------------
+--  Table `Detect`.`UF`
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `Detect`.`UF`;
+
+CREATE TABLE IF NOT EXISTS `Detect`.`UF` (
+ `UFId` INT NOT NULL AUTO_INCREMENT,
+ `UFDescription` VARCHAR(255),
+ PRIMARY KEY (`UFId`)
+
+);
+
+-- -----------------------------------------------------
+--  Table `Detect`.`City`
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `Detect`.`City`;
+
+CREATE TABLE IF NOT EXISTS `Detect`.`City` (
+ `CityId` INT NOT NULL AUTO_INCREMENT,
+ `CityDescription` VARCHAR(255),
+ `CityUF_id` INT NOT NULL,
+ PRIMARY KEY (`CityId`),
+
+ -- INDEX `City_idx` (`TypeFone` ASC),
+
+ CONSTRAINT `CityUF_id`
+ FOREIGN KEY (`CityUF_id`)
+ REFERENCES `Detect`.`City` (`CityId`)
+ ON DELETE RESTRICT
+ ON UPDATE RESTRICT
+
+);
 
   -- -----------------------------------------------------
 -- Table `Detect`.`FeatureTypes`
@@ -295,21 +443,77 @@ INSERT IGNORE INTO `Roles` (`RoleName`,`RoleDescription`) VALUES ("Negócios","h
 -- Table `Detect`.`Supervisors`
 -- -----------------------------------------------------
 
-INSERT IGNORE INTO `Supervisors` (`SupervisorName`,`SupervisorCPF`,`SupervisorPassword`,`SupervisorUsername`,`SupervisorCompany`,`SupervisorPosition`) VALUES ("Charde",71912050247,"6713","et@duinec.ca",0,0);
-INSERT IGNORE INTO `Supervisors` (`SupervisorName`,`SupervisorCPF`,`SupervisorPassword`,`SupervisorUsername`,`SupervisorCompany`,`SupervisorPosition`) VALUES ("Regina Case",41815402199,"0666","esqenta@yahoo.co",0,0);
-INSERT IGNORE INTO `Supervisors` (`SupervisorName`,`SupervisorCPF`,`SupervisorPassword`,`SupervisorUsername`,`SupervisorCompany`,`SupervisorPosition`) VALUES ("Otto",07275680190,"1234","golem@pedra.to",0,0);
-INSERT IGNORE INTO `Supervisors` (`SupervisorName`,`SupervisorCPF`,`SupervisorPassword`,`SupervisorUsername`,`SupervisorCompany`,`SupervisorPosition`) VALUES ("Antonio",49818451112,"4321","toin@cjr.or",0,0);
-INSERT IGNORE INTO `Supervisors` (`SupervisorName`,`SupervisorCPF`,`SupervisorPassword`,`SupervisorUsername`,`SupervisorCompany`,`SupervisorPosition`) VALUES ("Pedro",12947869602,"1432","cheiroso@dez.ne",0,0);
+INSERT IGNORE INTO `Supervisors` (`SupervisorName`,`SupervisorCPF`,`SupervisorPassword`,`SupervisorUsername`,`SupervisorCompany`,`SupervisorPosition`) VALUES ("Charde","71912050247","6713","et@duinec.ca",1,5);
+INSERT IGNORE INTO `Supervisors` (`SupervisorName`,`SupervisorCPF`,`SupervisorPassword`,`SupervisorUsername`,`SupervisorCompany`,`SupervisorPosition`) VALUES ("Regina Case","41815402199","0666","esqenta@yahoo.co",1,4);
+INSERT IGNORE INTO `Supervisors` (`SupervisorName`,`SupervisorCPF`,`SupervisorPassword`,`SupervisorUsername`,`SupervisorCompany`,`SupervisorPosition`) VALUES ("Otto","07275680190","1234","golem@pedra.to",2,2);
+INSERT IGNORE INTO `Supervisors` (`SupervisorName`,`SupervisorCPF`,`SupervisorPassword`,`SupervisorUsername`,`SupervisorCompany`,`SupervisorPosition`) VALUES ("Antonio","49818451112","4321","toin@cjr.or",3,3);
+INSERT IGNORE INTO `Supervisors` (`SupervisorName`,`SupervisorCPF`,`SupervisorPassword`,`SupervisorUsername`,`SupervisorCompany`,`SupervisorPosition`) VALUES ("Pedro","12947869602","1432","cheiroso@dez.ne",4,3);
+
+-- -----------------------------------------------------
+-- Table `Detect`.`Country`
+-- -----------------------------------------------------
+INSERT INTO `Country` (`CountryDescription`) VALUES ("Brasil");
+INSERT INTO `Country` (`CountryDescription`) VALUES ("Rússia");
+INSERT INTO `Country` (`CountryDescription`) VALUES ("Canadá");
+INSERT INTO `Country` (`CountryDescription`) VALUES ("Estados Unidos");
+INSERT INTO `Country` (`CountryDescription`) VALUES ("Japão");
+-- -----------------------------------------------------
+-- Table `Detect`.`City`
+-- -----------------------------------------------------
+INSERT INTO `City` (`CityDescription`, `CityUF_id`) VALUES ("Manaus", 1);
+INSERT INTO `City` (`CityDescription`, `CityUF_id`) VALUES ("Belém", 2);
+INSERT INTO `City` (`CityDescription`, `CityUF_id`) VALUES ("São Luís", 3);
+INSERT INTO `City` (`CityDescription`, `CityUF_id`) VALUES ("Texas", 4);
+INSERT INTO `City` (`CityDescription`, `CityUF_id`) VALUES ("Alagoinhas", 5);
+-- -----------------------------------------------------
+-- Table `Detect`.`UF`
+-- -----------------------------------------------------
+INSERT INTO `UF` (`UFDescription`) VALUES ("PA");
+INSERT INTO `UF` (`UFDescription`) VALUES ("MA");
+INSERT INTO `UF` (`UFDescription`) VALUES ("IN");
+INSERT INTO `UF` (`UFDescription`) VALUES ("TX");
+INSERT INTO `UF` (`UFDescription`) VALUES ("DF");
+-- -----------------------------------------------------
+-- Table `Detect`.`Gender`
+-- -----------------------------------------------------
+INSERT INTO `Gender` (`GenderDescription`) VALUES ("Heterosexual");
+INSERT INTO `Gender` (`GenderDescription`) VALUES ("Homosexual");
+INSERT INTO `Gender` (`GenderDescription`) VALUES ("Bisexual");
+INSERT INTO `Gender` (`GenderDescription`) VALUES ("Pansexual");
+INSERT INTO `Gender` (`GenderDescription`) VALUES ("Apache Helicopter");
+-- -----------------------------------------------------
+-- Table `Detect`.`TypePhone`
+-- -----------------------------------------------------
+INSERT INTO `TypeFone` (`TypeFoneDescription`) VALUES ("Comercial");
+INSERT INTO `TypeFone` (`TypeFoneDescription`) VALUES ("Pessoal");
+INSERT INTO `TypeFone` (`TypeFoneDescription`) VALUES ("Especial");
+INSERT INTO `TypeFone` (`TypeFoneDescription`) VALUES ("Secreto");
+INSERT INTO `TypeFone` (`TypeFoneDescription`) VALUES ("Outro");
+-- -----------------------------------------------------
+-- Table `Detect`.`Fone`
+-- -----------------------------------------------------
+INSERT INTO `Fone` (`FoneNumber`, `FoneTypeFone_id`) VALUES ("61981450180", 1);
+INSERT INTO `Fone` (`FoneNumber`, `FoneTypeFone_id`) VALUES ("61961550180", 2);
+INSERT INTO `Fone` (`FoneNumber`, `FoneTypeFone_id`) VALUES ("61991550180", 1);
+INSERT INTO `Fone` (`FoneNumber`, `FoneTypeFone_id`) VALUES ("61981557180", 4);
+INSERT INTO `Fone` (`FoneNumber`, `FoneTypeFone_id`) VALUES ("61981550181", 5);
+-- -----------------------------------------------------
+-- Table `Detect`.`UserCivilStatus`
+-- -----------------------------------------------------
+INSERT INTO `CivilStatus` (`CivilStatusDescription`) VALUES ("Solteiro");
+INSERT INTO `CivilStatus` (`CivilStatusDescription`) VALUES ("Namorando");
+INSERT INTO `CivilStatus` (`CivilStatusDescription`) VALUES ("Casado");
+INSERT INTO `CivilStatus` (`CivilStatusDescription`) VALUES ("Enrolando");
+INSERT INTO `CivilStatus` (`CivilStatusDescription`) VALUES ("Complicado");
 -- -----------------------------------------------------
 -- Table `Detect`.`Users`
 -- -----------------------------------------------------
 
-INSERT INTO `Users` (`UserName`) VALUES ("Selma");
-INSERT INTO `Users` (`UserName`) VALUES ("Velma");
-INSERT INTO `Users` (`UserName`) VALUES ("Fred");
-INSERT INTO `Users` (`UserName`) VALUES ("Daphne");
-INSERT INTO `Users` (`UserName`) VALUES ("Scooby");
-
+INSERT INTO `Users` (`UserName`, `UserCPF`, `UserIdentity`, `UserCivilStatus_id`, `UserGender_id`, `UserFone_id`, `UserCountry_id`, `UserCity_id`) VALUES ("Antonio H.", "12947968604", "12445678910", 1, 2, 1, 5, 1);
+INSERT INTO `Users` (`UserName`, `UserCPF`, `UserIdentity`, `UserCivilStatus_id`, `UserGender_id`, `UserFone_id`, `UserCountry_id`, `UserCity_id`) VALUES ("Velma", "12947968603", "12345678910", 2, 1, 1, 4, 2);
+INSERT INTO `Users` (`UserName`, `UserCPF`, `UserIdentity`, `UserCivilStatus_id`, `UserGender_id`, `UserFone_id`, `UserCountry_id`, `UserCity_id`) VALUES ("Fred", "12947968602", "12245678910", 3, 1, 1, 1, 3);
+INSERT INTO `Users` (`UserName`, `UserCPF`, `UserIdentity`, `UserCivilStatus_id`, `UserGender_id`, `UserFone_id`, `UserCountry_id`, `UserCity_id`) VALUES ("Daphne", "12947968601", "12145678910", 4, 1, 1, 3, 4);
+INSERT INTO `Users` (`UserName`, `UserCPF`, `UserIdentity`, `UserCivilStatus_id`, `UserGender_id`, `UserFone_id`, `UserCountry_id`, `UserCity_id`) VALUES ("Scooby", "12947968605", "12045678910", 2, 1, 1, 1, 5);
 
 -- -----------------------------------------------------
 -- Table `Detect`.`FeatureTypes`
@@ -347,7 +551,7 @@ INSERT INTO `Platforms` (`PlatformName`) VALUES ("Facebook");
 INSERT INTO `Platforms` (`PlatformName`) VALUES ("Instagram");
 
 -- -----------------------------------------------------
--- Associative Table `Detect`.`Relationships`
+-- Associative Table `Detect`.`Posts`
 -- -----------------------------------------------------
 
 INSERT INTO `Posts` (`PostText`, `PostLikes`, `Shares`, `Emotion`) VALUES ("Lorem Ipsum",1, 2, "Joy");
