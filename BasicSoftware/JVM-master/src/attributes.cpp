@@ -1,10 +1,3 @@
-/*!
- * \file
- * \brief Functions that handle the attributes data of a class file.
- * \authors Gustavo Henrique Fernandes Carvalho (14/0021671)
- * \authors Gabriel Pereira Pinheiro (14/0020764)
- */
-
 #include "attributes.h"
 
 t_exception_table* readExceptionHandler(FILE* fp)

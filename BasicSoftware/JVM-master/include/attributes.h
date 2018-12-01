@@ -148,7 +148,7 @@ void printAttributes(attribute_info* attributes, cp_info* cp, int length);
 string getMnemonic(int opcode);
 
 /*! \fn uint32_t getNBytesValue(uint8_t n, unsigned char* code, int* index)
-	\brief Function who returns a value 
+	\brief Function which returns a value 
 	\param n NUmber of bytes wanted to read.
 	\param code Pointer of bytes .
 	\param index Index point to addres of opcode parameter.
