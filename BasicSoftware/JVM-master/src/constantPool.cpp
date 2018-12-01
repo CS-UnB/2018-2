@@ -15,7 +15,7 @@ int loadConstantPool (cp_info *constantPool, int lengthCP, FILE* fp)
 		constantPool[i].tag = readU1(fp);
 		
 		// Check the field type
-		if (!(constantPool[i].tag >= 0) && !(constantPool[i].tag <= 12) && !(constantPool[i].tag != 2))
+		if (!(constantPool[i].tag > 0) && !(constantPool[i].tag <= 12) && !(constantPool[i].tag != 2))
 		{
 			// If it doesn't know the type end the function
 			return i;

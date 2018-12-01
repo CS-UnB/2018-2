@@ -9,7 +9,7 @@ CXX_SOURCES  = $(wildcard $(SRC_DIR)/*.cpp)
 INCLUDES = $(wildcard $(INC_DIR)/*.h)
 OBJECTS  = $(CXX_SOURCES:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
-CFLAGS = -std=c++11 -I$(INC_DIR)
+CFLAGS = -std=c++11 -I$(INC_DIR) -Wall -Wextra
 
 ifeq ($(OS),Windows_NT)
 	EXE = bin\jvm.exe
